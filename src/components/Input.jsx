@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 
 class Input extends Component {
     render() {
-        const {id, type, name, label, onChange, value, ...otherProps} = this.props
+        const {id, type, name, onChange, value,error,  classy,...otherProps} = this.props
         return (
-            <div>
-                <label htmlFor={id}>{label}</label>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection:"column"
+            }}>
                 <input
+                    className={classy}
                     type={type}
                     id={id}
                     name={name}
@@ -14,6 +19,7 @@ class Input extends Component {
                     value={value}
                     {...otherProps}
                 />
+                {error && <div className='error-div'>{error}</div>}
             </div>
         );
     }

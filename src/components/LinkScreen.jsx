@@ -6,8 +6,23 @@ import leetcode from "../images/leetcode.png"
 import linkedin from "../images/linkedin.png"
 import github from "../images/github.png"
 import hackerrank from "../images/hackerrank.png"
+import { getStudent } from '../services/studentService';
 
 class LinkScreen extends Component {
+    state = {
+        student:{},
+    }
+    async componentDidMount() {
+        try {
+            const response = await getStudent(this.props.match.params.id)
+            this.setState({student:response.data})
+        }
+        catch (ex) {
+            if (ex.response && ex.response.status === 404) {
+                this.props.history.replace("/not-found")
+            }
+        }
+    }
     box(img, text, link) {
         return (
             <div className='box'>
@@ -18,16 +33,16 @@ class LinkScreen extends Component {
     }
     render() {
         return (
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection:"column"}}>
-                <h2>SIDDU SIRASANAMBETI</h2>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection:"column", fontStyle:"italic"}}>
+                <h2>{this.state.student.name}</h2>
                 <h2>{this.props.match.params.id}</h2>
                 <div className='boxes-container'>
-                    {this.box(codechef, "CODE CHEF", "/student/1/codechef")}
-                    {this.box(codeforces, "CODE FORCES", "/student/1/codeforces")}
-                    {this.box(leetcode, "LEET CODE", "/student/1/leetcode")}
-                    {this.box(linkedin, "LINKED IN", "/student/1/linkedin")}
-                    {this.box(github, "GIT HUB", "/student/1/github")}
-                    {this.box(hackerrank, "HACKER RANK", "/student/1/hackerrank")}
+                    {this.box(codechef, "CODE CHEF", `/student/${this.props.match.params.id}/codechef`)}
+                    {this.box(codeforces, "CODE FORCES", `/student/${this.props.match.params.id}/codeforces`)}
+                    {this.box(github, "GIT HUB", `/student/${this.props.match.params.id}/github`)}
+                    {this.box(leetcode, "LEET CODE", `/student/${this.props.match.params.id}/leetcode`)}
+                    {this.box(linkedin, "LINKED IN", `/student/${this.props.match.params.id}/linkedin`)}
+                    {this.box(hackerrank, "HACKER RANK", `/student/${this.props.match.params.id}/hackerrank`)}
                 </div>
             </div>
         );
