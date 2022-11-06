@@ -30,9 +30,9 @@ class ProfileForm extends Form {
         github_username: Joi.string().max(255).required().label("Github username"),
         codechef_username: Joi.string().max(255).required().label("CodeChef username"),
         codeforces_username: Joi.string().max(255).required().label("CodeForces username"),
-        linkedin_username: Joi.string().max(255).label("Linked In username"),
-        hackerrank_username: Joi.string().max(255).label("Hackerrank username"),
-        leetcode_username: Joi.string().max(255).label("Leetcode username"),
+        linkedin_username: Joi.string().max(255).required().label("Linked In username"),
+        hackerrank_username: Joi.string().max(255).required().label("Hackerrank username"),
+        leetcode_username: Joi.string().max(255).required().label("Leetcode username"),
         user_id: Joi.number().required().min(1)
     }
     doSubmit = async () => {
