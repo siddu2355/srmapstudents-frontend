@@ -17,6 +17,7 @@ class NavBar extends Component {
                         </React.Fragment>
                     )}
                     <li><div className='nav-link'><Link className='nav-link-text' to="/student">Search</Link></div></li>
+                    {user.user_id !== -1 &&<li><div className='nav-link'><Link className='nav-link-text' to="/profile">Your Profile</Link></div></li>}
                     {user.user_id !== -1 &&<li><div className='nav-link'><Link className='nav-link-text' to="/log-out">Log Out</Link></div></li>}
                 </ul>
             </nav>
